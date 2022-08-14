@@ -10,9 +10,6 @@ client.on('ready', () => {
 let tt = 0
 
 client.on("messageCreate", (msg) => {
-    if (msg.author.discriminator == '8870') {
-        console.log("se")
-    }
     const msgTime = msg.createdAt.getTime()
     if (msg.member.roles.cache.has('1008473280673493094')) {
         const canPost = msgTime - 60000 >= tt
@@ -21,9 +18,6 @@ client.on("messageCreate", (msg) => {
         }
     }
     tt = msgTime
-    console.log(msg.author.id)
-    //console.log(msg.author)
-    console.log("sas")
 })
 
 
