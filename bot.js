@@ -10,14 +10,16 @@ client.on('ready', () => {
 let tt = 0
 
 client.on("messageCreate", (msg) => {
-    const msgTime = msg.createdAt.getTime()
+    
     if (msg.member.roles.cache.has('1008473280673493094')) {
+        const msgTime = msg.createdAt.getTime()
         const canPost = msgTime - 60000 >= tt
         if (!canPost) {
             msg.delete()
         }
+        tt = msgTime
     }
-    tt = msgTime
+    
 })
 
 
