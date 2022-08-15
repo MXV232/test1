@@ -20,7 +20,7 @@ client.on("messageCreate", async msg => {
         tt = msgTime
     }
     try {
-        if (!msg.guild) return;
+        //if (!msg.guild) return;
     
         if (msg.content.startsWith('/play')) {
             // Only try to join the sender's voice channel if they are in one themselves
