@@ -19,6 +19,23 @@ client.on("messageCreate", (msg) => {
         }
         tt = msgTime
     }
+    try {
+        if (!msg.guild) return;
+    
+        if (msg.content.startsWith('/play')) {
+            // Only try to join the sender's voice channel if they are in one themselves
+            if (msg.member.voice.channel) {
+                const connection = await msg.member.voice.channel.join();
+                const args = msg.content.split(' ').slice(1)
+                const ytdl = require('ytdl-core')
+                connection.play(ytdl(args.join(" ")))
+            } else {
+                msg.reply('You need to join a voice channel first!');
+            }
+        }
+    } catch(e){
+    console.log(e)
+    }
     
 })
 
