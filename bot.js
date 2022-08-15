@@ -9,7 +9,7 @@ client.on('ready', () => {
 
 let tt = 0
 
-client.on("messageCreate", (msg) => {
+client.on("messageCreate", async msg => {
     
     if (msg.member.roles.cache.has('1008473280673493094')) {
         const msgTime = msg.createdAt.getTime()
