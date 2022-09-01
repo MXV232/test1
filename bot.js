@@ -1,41 +1,19 @@
 require("dotenv").config()
 
+const { joinVoiceChannel, createAudioResource, createAudioPlayer } = require('@discordjs/voice');
 const { Discord, Client, GatewayIntentBits } = require('discord.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildVoiceStates] });
 
 client.on('ready', () => {
     console.log("GG")
 })
 
-let tt = 0
-
 client.on("messageCreate", async msg => {
     
-    if (msg.member.roles.cache.has('1008473280673493094')) {
-        const msgTime = msg.createdAt.getTime()
-        const canPost = msgTime - 60000 >= tt
-        if (!canPost) {
-            msg.delete()
-        }
-        tt = msgTime
+    if (msg.content.startsWith('/random')) {
+        const args = msg.content.split(' ').slice(1)
+        msg.reply(args[Math.floor(Math.random() * args.length)])
     }
-    
-    try {
-        if (msg.content.startsWith('/play')) {
-            // Only try to join the sender's voice channel if they are in one themselves
-            if (msg.member.voice.channel) {
-                const connection = await msg.member.voice.channel.join();
-                const args = msg.content.split(' ').slice(1)
-                const ytdl = require('ytdl-core')
-                connection.play(ytdl(args.join(" ")))
-            } else {
-                msg.reply('You need to join a voice channel first!');
-            }
-        }
-    } catch(e){
-    console.log(e)
-    }
-    
 })
 
 
