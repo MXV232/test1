@@ -1,2 +1,4 @@
 .env
 node_modules
+backup.txt
+deploy-commands.js
