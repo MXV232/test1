@@ -24,7 +24,7 @@ module.exports = {
                 }
                 
             })
-            interaction.channel.bulkDelete(10)
+            interaction.channel.bulkDelete(messages.size)
             .then(messages => {
                 console.log(`Bulk deleted ${messages.size} messages`)
                 interaction.reply({content: "Votacion cerrada", ephemeral:true})
